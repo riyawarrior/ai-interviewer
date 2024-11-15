@@ -1,4 +1,4 @@
-"use client"; // This is necessary for client-side interactivity
+"use client"; 
 import { useEffect, useState } from 'react';
 
 const HomePage = () => {
@@ -6,12 +6,12 @@ const HomePage = () => {
     const [typingComplete, setTypingComplete] = useState(false);
     const [typedText, setTypedText] = useState("");
 
-    const text = 'HHello! I am your AI Advisor. I am here to help you with personalized advice, tailored just for you. Whether you need guidance on your projects, insights to improve your skills, or any other support, I’ve got you covered. Let’s get started and unlock your full potential together! To move forward, you need to select your stream. Click on the button below to start.';
+    const text = 'Hello! I am your AI Advisor. I am here to help you with personalized advice, tailored just for you. Whether you need guidance on your projects, insights to improve your skills, or any other support, I’ve got you covered. Let’s get started and unlock your full potential together! To move forward, you need to select your stream. Click on the button below to start.';
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowText(true);
-        }, 1000); // Delay of 1 second
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -21,13 +21,13 @@ const HomePage = () => {
             let index = 0;
             const interval = setInterval(() => {
                 if (index < text.length) {
-                    setTypedText((prev) => prev + text[index]);
+                    setTypedText((prev) => prev + text.charAt(index));
                     index++;
                 } else {
-                    clearInterval(interval); // Stop typing once text is fully typed
-                    setTypingComplete(true); // Mark typing as complete
+                    clearInterval(interval); 
+                    setTypingComplete(true); 
                 }
-            }, 50); // Speed at which text is typed
+            }, 50); 
 
             return () => clearInterval(interval);
         }
