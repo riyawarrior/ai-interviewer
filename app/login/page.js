@@ -1,4 +1,4 @@
-"use client";
+"use client"; // For client-side rendering
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -10,7 +10,15 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Logging in with:', email, password);
-        router.push('/dashboard'); 
+
+        // Mock authentication logic (replace with actual API call)
+        const isAuthenticated = email === 'test@example.com' && password === 'password'; // Mock check
+
+        if (isAuthenticated) {
+            router.push('/home');  // Redirect to Home page on successful login
+        } else {
+            alert('Invalid credentials! Please try again.');
+        }
     };
 
     return (
@@ -18,14 +26,12 @@ const LoginPage = () => {
             <div className="w-full max-w-md p-8 space-y-8 bg-gray-800 rounded-lg shadow-lg">
                 {/* Logo section */}
                 <div className="flex justify-center">
-                <img 
-                    src="/transparent_ai_logo.png" 
-                    alt="AI Advisor Logo" 
-                    className="w-24 h-auto mb-4" 
-                />
-
+                    <img 
+                        src="/transparent_ai_logo.png" 
+                        alt="AI Advisor Logo" 
+                        className="w-24 h-auto mb-4" 
+                    />
                 </div>
-                {/* <h1 className="text-3xl font-bold text-white">AI Advisor</h1> */}
                 <p className="text-gray-400">Please login to your account</p>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
