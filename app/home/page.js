@@ -1,12 +1,19 @@
 "use client"; 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const HomePage = () => {
     const [showText, setShowText] = useState(false);
     const [typingComplete, setTypingComplete] = useState(false);
     const [typedText, setTypedText] = useState("");
-
-    const text = 'Hello! I am your AI Advisor. I am here to help you with personalized advice, tailored just for you. Whether you need guidance on your projects, insights to improve your skills, or any other support, I’ve got you covered. Let’s get started and unlock your full potential together! To move forward, you need to select your stream. Click on the button below to start.';
+    const router = useRouter();
+    
+     const navigateToStream =() => {
+        router.push('/stream');
+     }
+  
+    const text = ' Hello!  I am your AI Advisor. I am here to help you with personalized advice, tailored just for you. Whether you need guidance on your projects, insights to improve your skills, or any other support, I’ve got you covered. Let’s get started and unlock your full potential together! To move forward, you need to select your stream. Click on the button below to start.';
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -55,7 +62,9 @@ const HomePage = () => {
                     </p>
                 )}
                 {typingComplete && (
-                    <button className="mt-6 px-6 py-2 bg-pink-600 text-white text-lg font-semibold rounded-lg hover:bg-pink-700 transition-all duration-300">
+                    <button  
+                    onClick={navigateToStream}
+                    className="mt-6 px-6 py-2 bg-pink-600 text-white text-lg font-semibold rounded-lg hover:bg-pink-700 transition-all duration-300">
                         Start
                     </button>
                 )}
