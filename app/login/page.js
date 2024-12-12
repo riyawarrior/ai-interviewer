@@ -1,4 +1,4 @@
-"use client"; // For client-side rendering
+"use client"; 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -11,11 +11,10 @@ const LoginPage = () => {
         e.preventDefault();
         console.log('Logging in with:', email, password);
 
-        // Mock authentication logic (replace with actual API call)
-        const isAuthenticated = email === 'test@example.com' && password === 'password'; // Mock check
+        const isAuthenticated = email === 'test@example.com' && password === 'password';
 
         if (isAuthenticated) {
-            router.push('/home');  // Redirect to Home page on successful login
+            router.push('/home'); 
         } else {
             alert('Invalid credentials! Please try again.');
         }
@@ -23,7 +22,7 @@ const LoginPage = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-900">
-            <div className="w-full max-w-md p-8 space-y-8 bg-gray-800 rounded-lg shadow-lg">
+            <div className="w-full max-w-md p-8 space-y-8 bg-gray-700 rounded-lg shadow-lg">
                 {/* Logo section */}
                 <div className="flex justify-center">
                     <img 
