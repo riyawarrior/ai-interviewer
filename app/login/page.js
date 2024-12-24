@@ -1,5 +1,6 @@
 "use client"; 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
@@ -25,7 +26,7 @@ const LoginPage = () => {
             <div className="w-full max-w-md p-8 space-y-8 bg-gray-700 rounded-lg shadow-lg">
                 {/* Logo section */}
                 <div className="flex justify-center">
-                    <img 
+                    <Image
                         src="/transparent_ai_logo.png" 
                         alt="AI Advisor Logo" 
                         className="w-24 h-auto mb-4" 

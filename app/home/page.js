@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const HomePage = () => {
     const [showText, setShowText] = useState(false);
@@ -65,7 +66,7 @@ const HomePage = () => {
             {/* Text content with white transparent background */}
             {!showDialog && (
                 <div className="relative z-10 text-center max-w-lg bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg">
-                    <img
+                    <Image
                         src="/transparent_ai_logo.png"
                         alt="AI Advisor"
                         className="mx-auto w-20 mb-4"

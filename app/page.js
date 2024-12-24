@@ -1,5 +1,6 @@
 "use client"
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const HomePage = () => {
@@ -17,7 +18,7 @@ const HomePage = () => {
 
             <div className={`text-center space-y-6 transition-all duration-1000 ${animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 {/* Logo with hover scaling effect */}
-                <img 
+                <Image
                   src="/transparent_ai_logo.png" 
                   alt="AI Advisor Logo" 
                   className="mx-auto w-49 h-auto hover:scale-110 transition-transform duration-500 ease-in-out"
