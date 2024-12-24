@@ -33,7 +33,9 @@ const LoginPage = () => {
             alt="AI Advisor Logo"
             className="w-24 h-auto mb-4"
             width={96}
+            height={96}
           />
+
         </div>
         <p className="text-gray-400">Please login to your account</p>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -56,7 +58,7 @@ const LoginPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-20 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
           </div>
           <div className="flex justify-end">

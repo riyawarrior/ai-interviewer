@@ -23,7 +23,6 @@ const HomePage = () => {
                   alt="AI Advisor Logo" 
                   width={96}
                   height={96}
-                  
                   className="mx-auto w-49 h-auto hover:scale-110 transition-transform duration-500 ease-in-out"
                 />
 

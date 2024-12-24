@@ -69,6 +69,8 @@ const HomePage = () => {
                     <Image
                         src="/transparent_ai_logo.png"
                         alt="AI Advisor"
+                        width={80}
+                        height={80}
                         className="mx-auto w-20 mb-4"
                     />
                     <h1 className="text-4xl text-white font-bold mb-6">
