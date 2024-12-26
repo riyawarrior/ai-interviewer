@@ -1,12 +1,28 @@
 "use client";
-import { useState } from "react";
-import ChatInput from "./ChatInput";
+import { useState,useEffect } from "react";
+import ChatInput from "./ChatInput"
+import { fetchQuestions } from "../utils/index";
 
 const ChatScreen = () => {
+    const [questionData, setQuestionData] = useState([]);
+  const [error, setError] = useState(null);
     const [messages, setMessages] = useState([
         { sender: "bot", text: "Hello! How can I help you today?" },
     ]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const data = await fetchQuestions();
+            setQuestionData(data); // Update state with fetched questions
+          } catch (err) {
+            setError(err.message);
+          }
+        };
+        fetchData();
+      }, []);
+
+    
     const handleSend = (text) => {
         setMessages((prev) => [...prev, { sender: "user", text }]);
 
@@ -36,6 +52,28 @@ const ChatScreen = () => {
                 ))}
             </div>
             <ChatInput onSend={handleSend} />
+            <div style={{ marginTop: "20px" }}>
+            {/* Render error if any */}
+            {error && <p style={{ color: "red" }}>Error: {error}</p>}
+            
+            {/* Render question data */}
+            {questionData ? (
+              <div style={{ color: "red" }}>
+                <h3>Question:</h3>
+                <p>{questionData.question}</p>
+
+                <h3>Answer:</h3>
+                <p>{questionData.answer}</p>
+
+                <h3>Explanation:</h3>
+                <p>{questionData.explanation}</p>
+              </div>
+            ) : (
+              <p>Loading question...</p> // Show loading message while fetching
+            )}
+          </div>
+
+
         </div>
     );
 };

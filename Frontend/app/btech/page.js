@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar";
 import {
   CameraIcon,
@@ -7,12 +8,17 @@ import {
 } from "@heroicons/react/24/outline";
 
 const BTechPage = () => {
+
   const router = useRouter();
   const links = [
     { href: "/btech/topic1", label: "Topic 1" },
     { href: "/btech/topic2", label: "Topic 2" },
     { href: "/btech/topic3", label: "Topic 3" },
   ];
+
+
+
+
 
   return (
     <div className="flex">
