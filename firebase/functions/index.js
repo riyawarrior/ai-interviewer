@@ -1,60 +1,47 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+// functions/index.js
+const functions = require("firebase-functions");
 const cors = require("cors")({ origin: true });
-const { onRequest } = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
-const { genkit, z } = require("genkit");
 const { googleAI, gemini15Pro } = require("@genkit-ai/googleai");
+const { genkit, z } = require("genkit");
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
+// Initialize AI
 const ai = genkit({
-  plugins: [googleAI({ apiKey: "AIzaSyCOevbpnEJ3enKO9bTlDBZv7hW2Dn6mfYM" })],
+  plugins: [googleAI({ apiKey: "AIzaSyCOevbpnEJ3enKO9bTlDBZv7hW2Dn6mfYM" })], // Replace with your API key
   model: gemini15Pro,
 });
 
-// // exports.question = onRequest(async (request, response) => {
-// // //   logger.info("Hello logs!", {structuredData: true});
-// // //   response.send("Hello from Firebase!");
-// // const {text} = await ai.generate({
-// // prompt:"generate one question"
-
-// // })
-// response.send(text)
-// });
-exports.question = onRequest(async (request, response) => {
+// Firebase Function to handle chatbot replies
+exports.chatbotReply = functions.https.onRequest((request, response) => {
   return cors(request, response, async () => {
     try {
+      const { userMessage } = request.body;
+
+      if (!userMessage) {
+        return response.status(400).json({ error: "User message is required." });
+      }
+
+      // AI prompt to generate dynamic response based on user input
+      const prompt = `You are an AI interview preparation assistant. Respond to: "${userMessage}". Provide a helpful reply and a follow-up question.`;
+
+      // Generate response using the AI model
       const { output } = await ai.generate({
-        prompt: "Give 2 tips for interview preparation as a btech student",
+        prompt: prompt,
         output: {
           format: "json",
           schema: z.object({
-            question: z.string(),
-            answer: z.string(),
-            explanation: z.string(),
+            reply: z.string(),
+            nextPrompt: z.string(),
           }),
         },
       });
 
-      console.log("AI Output:", output);
-      return response.status(200).json(output);
+      return response.status(200).json({
+        reply: output.reply,
+        nextPrompt: output.nextPrompt,
+      });
     } catch (error) {
-      console.error("Error in AI Generation:", error);
+      console.error("Error in chatbotReply:", error);
       return response.status(500).json({ error: "Internal server error" });
     }
   });
 });
-
-
-// const ai = genkit({
-//   plugins: [googleAI({ apiKey: "" })],
-//   model: gemini15Pro,
-// });
